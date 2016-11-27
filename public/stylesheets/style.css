@@ -6,3 +6,31 @@ body {
 a {
   color: #00B7FF;
 }
+
+.adjuster {
+  display: inline-flex;
+}
+
+.time-container {
+  display: inline-flex;
+  margin-right: 20px;
+}
+
+.time-container:last-child {
+  margin-right: 0px;
+}
+
+
+.cishu-container {
+  display: inline-flex;
+}
+
+.left-button {
+  border-top-left-radius: 10px 10px;
+  border-bottom-left-radius: 10px 10px;
+}
+
+.right-button {
+  border-top-right-radius: 10px 10px;
+  border-bottom-right-radius: 10px 10px;
+}

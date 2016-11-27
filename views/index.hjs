@@ -2,13 +2,17 @@
 <html>
   <head>
     <title>{{ title }}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
 　　　　<link rel='stylesheet' href='/stylesheets/font-awesome.min.css'>
     <link rel='stylesheet' href='/javascripts/flipclock/flipclock.css'>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css'>
+    <link rel='stylesheet' href='/stylesheets/bootstrap-theme.min.css'>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+　　　　<script src="http://use.fontawesome.com/e48b48a7fc.js"></script>
   </head>
   <body>
     <div id="content">{{{markup}}}</div>
     <script src="javascripts/jquery-3.1.1.min.js"></script>
+　　　　<script src="bootstrap.min.js"></script>
     <script src="javascripts/flipclock/flipclock.min.js"></script>
     <script src="javascripts/bundle.js"></script>
     <script src="javascripts/init-clock.js"></script>

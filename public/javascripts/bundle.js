@@ -21575,94 +21575,106 @@
 	      console.log(this.props);
 	      return _react2.default.createElement(
 	        "div",
-	        { className: "clock-component\u3000row" },
+	        null,
 	        _react2.default.createElement(
 	          "div",
-	          { className: "text-center title" },
-	          "Pomodoro Clock"
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "text-center sub-title" },
-	          "A PRODUCTIVITY TIMER"
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "time-container" },
-	          _react2.default.createElement(
-	            "button",
-	            { className: "", onClick: this.shortBreakMinus.bind(this) },
-	            _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
-	          ),
+	          { className: "container" },
 	          _react2.default.createElement(
 	            "div",
-	            null,
-	            this.props.numbers.shortBreakTime
-	          ),
-	          _react2.default.createElement(
-	            "button",
-	            { className: "", onClick: this.shortBreakPlus.bind(this) },
-	            _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
+	            { className: "clock-component\u3000row" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "text-center title" },
+	              "Pomodoro Clock"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "text-center sub-title" },
+	              "A PRODUCTIVITY TIMER"
+	            ),
+	            _react2.default.createElement(
+	              "div",
+	              { className: "adjuster col-sm-6 col-sm-offset-3" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "time-container col-sm-3" },
+	                _react2.default.createElement(
+	                  "button",
+	                  { className: "left-button btn btn-default", onClick: this.shortBreakMinus.bind(this) },
+	                  _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
+	                ),
+	                _react2.default.createElement(
+	                  "div",
+	                  { className: "number" },
+	                  this.props.numbers.shortBreakTime
+	                ),
+	                _react2.default.createElement(
+	                  "button",
+	                  { className: "right-button btn btn-default", onClick: this.shortBreakPlus.bind(this) },
+	                  _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "time-container col-sm-3" },
+	                _react2.default.createElement(
+	                  "button",
+	                  { className: "left-button btn btn-default", onClick: this.longBreakMinus.bind(this) },
+	                  _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
+	                ),
+	                _react2.default.createElement(
+	                  "div",
+	                  { className: "number" },
+	                  this.props.numbers.longBreakTime
+	                ),
+	                _react2.default.createElement(
+	                  "button",
+	                  { className: "right-button btn btn-default", onClick: this.longBreakPlus.bind(this) },
+	                  _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "time-container col-sm-3" },
+	                _react2.default.createElement(
+	                  "button",
+	                  { className: "left-button btn btn-default", onClick: this.workTimeMinus.bind(this) },
+	                  _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
+	                ),
+	                _react2.default.createElement(
+	                  "div",
+	                  { className: "number" },
+	                  this.props.numbers.workTime
+	                ),
+	                _react2.default.createElement(
+	                  "button",
+	                  { className: "right-button btn btn-default", onClick: this.workTimePlus.bind(this) },
+	                  _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
+	                )
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "cishu-container col-sm-3" },
+	                _react2.default.createElement(
+	                  "button",
+	                  { className: "left-button btn btn-default", onClick: this.cishuMinus.bind(this) },
+	                  _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
+	                ),
+	                _react2.default.createElement(
+	                  "div",
+	                  { className: "number" },
+	                  this.props.numbers.cishu
+	                ),
+	                _react2.default.createElement(
+	                  "button",
+	                  { className: "right-button btn btn-default", onClick: this.cishuPlus.bind(this) },
+	                  _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
+	                )
+	              )
+	            )
 	          )
 	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "time-container" },
-	          _react2.default.createElement(
-	            "button",
-	            { className: "", onClick: this.longBreakMinus.bind(this) },
-	            _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            null,
-	            this.props.numbers.longBreakTime
-	          ),
-	          _react2.default.createElement(
-	            "button",
-	            { className: "", onClick: this.longBreakPlus.bind(this) },
-	            _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "time-container" },
-	          _react2.default.createElement(
-	            "button",
-	            { className: "", onClick: this.workTimeMinus.bind(this) },
-	            _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            null,
-	            this.props.numbers.workTime
-	          ),
-	          _react2.default.createElement(
-	            "button",
-	            { className: "", onClick: this.workTimePlus.bind(this) },
-	            _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "cishu-container" },
-	          _react2.default.createElement(
-	            "button",
-	            { className: "", onClick: this.cishuMinus.bind(this) },
-	            _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            null,
-	            this.props.numbers.cishu
-	          ),
-	          _react2.default.createElement(
-	            "button",
-	            { className: "", onClick: this.cishuPlus.bind(this) },
-	            _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
-	          )
-	        ),
-	        _react2.default.createElement("div", { id: "countdown-clock" })
+	        _react2.default.createElement("div", { id: "countdown-clock", className: "" })
 	      );
 	    }
 	  }, {

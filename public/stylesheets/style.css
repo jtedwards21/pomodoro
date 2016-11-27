@@ -7,8 +7,17 @@ a {
   color: #00B7FF;
 }
 
+.title {
+  margin-bottom: 10px;
+}
+
+.sub-title {
+  margin-bottom: 10px;
+}
+
 .adjuster {
   display: inline-flex;
+  margin-bottom: 40px;
 }
 
 .time-container {
@@ -20,6 +29,11 @@ a {
   margin-right: 0px;
 }
 
+#countdown-clock {
+  width: 460px;
+  float: none;
+  margin: 0 auto;
+}
 
 .cishu-container {
   display: inline-flex;

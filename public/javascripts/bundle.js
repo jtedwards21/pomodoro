@@ -21601,8 +21601,8 @@
 	          ),
 	          _react2.default.createElement(
 	            "button",
-	            { className: "" },
-	            _react2.default.createElement("i", { className: "fa fa-plus fa-1g", onClick: this.shortBreakPlus })
+	            { className: "", onClick: this.shortBreakPlus.bind(this) },
+	            _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -21610,7 +21610,7 @@
 	          { className: "time-container" },
 	          _react2.default.createElement(
 	            "button",
-	            { className: "", onClick: this.longBreakMinus },
+	            { className: "", onClick: this.longBreakMinus.bind(this) },
 	            _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
 	          ),
 	          _react2.default.createElement(
@@ -21620,8 +21620,8 @@
 	          ),
 	          _react2.default.createElement(
 	            "button",
-	            { className: "" },
-	            _react2.default.createElement("i", { className: "fa fa-plus fa-1g", onClick: this.longBreakPlus })
+	            { className: "", onClick: this.longBreakPlus.bind(this) },
+	            _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -21629,7 +21629,7 @@
 	          { className: "time-container" },
 	          _react2.default.createElement(
 	            "button",
-	            { className: "", onClick: this.workTimeMinus },
+	            { className: "", onClick: this.workTimeMinus.bind(this) },
 	            _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
 	          ),
 	          _react2.default.createElement(
@@ -21639,8 +21639,8 @@
 	          ),
 	          _react2.default.createElement(
 	            "button",
-	            { className: "" },
-	            _react2.default.createElement("i", { className: "fa fa-plus fa-1g", onClick: this.workTimePlus })
+	            { className: "", onClick: this.workTimePlus.bind(this) },
+	            _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -21648,7 +21648,7 @@
 	          { className: "cishu-container" },
 	          _react2.default.createElement(
 	            "button",
-	            { className: "", onClick: this.cishuMinus },
+	            { className: "", onClick: this.cishuMinus.bind(this) },
 	            _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
 	          ),
 	          _react2.default.createElement(
@@ -21658,8 +21658,8 @@
 	          ),
 	          _react2.default.createElement(
 	            "button",
-	            { className: "" },
-	            _react2.default.createElement("i", { className: "fa fa-plus fa-1g", onClick: this.cishuPlus })
+	            { className: "", onClick: this.cishuPlus.bind(this) },
+	            _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
 	          )
 	        ),
 	        _react2.default.createElement("div", { id: "countdown-clock" })
@@ -21668,77 +21668,58 @@
 	  }, {
 	    key: "shortBreakMinus",
 	    value: function shortBreakMinus(event) {
-	      console.log('d');
-	      console.log(this.props);
 	      var newNumbers = this.props.numbers;
 	      newNumbers.shortBreakTime = newNumbers.shortBreakTime - 1;
 	      onChange(newNumbers);
 	    }
-
-	    //Rewrite all of these
-
 	  }, {
 	    key: "shortBreakPlus",
 	    value: function shortBreakPlus(event) {
-	      var newBreakTime = this.state.shortBreakTime + 1;
-	      this.setState({
-	        shortBreakTime: newBreakTime
-	      });
-	      onChange();
+	      var newNumbers = this.props.numbers;
+	      newNumbers.shortBreakTime = newNumbers.shortBreakTime + 1;
+	      onChange(newNumbers);
 	    }
 	  }, {
 	    key: "longBreakMinus",
 	    value: function longBreakMinus(event) {
-	      var newBreakTime = this.state.longBreakTime - 1;
-	      this.setState({
-	        longBreakTime: newBreakTime
-	      });
-	      onChange();
+	      var newNumbers = this.props.numbers;
+	      newNumbers.longBreakTime = newNumbers.longBreakTime - 1;
+	      onChange(newNumbers);
 	    }
 	  }, {
 	    key: "longBreakPlus",
 	    value: function longBreakPlus(event) {
-	      var newBreakTime = this.state.longBreakTime + 1;
-	      this.setState({
-	        longBreakTime: newBreakTime
-	      });
-	      onChange();
+	      var newNumbers = this.props.numbers;
+	      newNumbers.longBreakTime = newNumbers.longBreakTime + 1;
+	      onChange(newNumbers);
 	    }
 	  }, {
 	    key: "workTimeMinus",
 	    value: function workTimeMinus(event) {
-	      var newTime = this.state.longBreakTime - 1;
-	      this.setState({
-	        longBreakTime: newTime
-	      });
-	      onChange();
+	      var newNumbers = this.props.numbers;
+	      newNumbers.workTime = newNumbers.workTime - 1;
+	      onChange(newNumbers);
 	    }
 	  }, {
 	    key: "workTimePlus",
 	    value: function workTimePlus(event) {
-	      var newTime = this.state.workTime + 1;
-	      this.setState({
-	        workTime: newTime
-	      });
-	      onChange();
+	      var newNumbers = this.props.numbers;
+	      newNumbers.workTime = newNumbers.workTime + 1;
+	      onChange(newNumbers);
 	    }
 	  }, {
 	    key: "cishuMinus",
 	    value: function cishuMinus(event) {
-	      var newCishu = this.state.cishu - 1;
-	      this.setState({
-	        longBreakTime: newCishu
-	      });
-	      onChange();
+	      var newNumbers = this.props.numbers;
+	      newNumbers.cishu = newNumbers.cishu - 1;
+	      onChange(newNumbers);
 	    }
 	  }, {
 	    key: "cishuPlus",
 	    value: function cishuPlus(event) {
-	      var newCishu = this.state.cishu + 1;
-	      this.setState({
-	        workTime: newCishu
-	      });
-	      onChange();
+	      var newNumbers = this.props.numbers;
+	      newNumbers.cishu = newNumbers.cishu + 1;
+	      onChange(newNumbers);
 	    }
 	  }, {
 	    key: "startClock",

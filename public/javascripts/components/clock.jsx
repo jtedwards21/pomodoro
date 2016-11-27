@@ -29,25 +29,25 @@ export default class Clock extends React.Component {
 	<div className="time-container">
 	  <button className="" onClick={this.shortBreakMinus.bind(this)}><i className="fa fa-minus fa-1g"></i></button>
           <div>{this.props.numbers.shortBreakTime}</div>
-	  <button className=""><i className="fa fa-plus fa-1g" onClick={this.shortBreakPlus}></i></button>
+	  <button className=""  onClick={this.shortBreakPlus.bind(this)}><i className="fa fa-plus fa-1g"></i></button>
 	</div>
 
 	<div className="time-container">
-	  <button className="" onClick={this.longBreakMinus}><i className="fa fa-minus fa-1g"></i></button>
+	  <button className="" onClick={this.longBreakMinus.bind(this)}><i className="fa fa-minus fa-1g"></i></button>
           <div>{this.props.numbers.longBreakTime}</div>
-	  <button className=""><i className="fa fa-plus fa-1g" onClick={this.longBreakPlus}></i></button>
+	  <button className=""  onClick={this.longBreakPlus.bind(this)}><i className="fa fa-plus fa-1g"></i></button>
 	</div>
 
 	<div className="time-container">
-	  <button className="" onClick={this.workTimeMinus}><i className="fa fa-minus fa-1g"></i></button>
+	  <button className="" onClick={this.workTimeMinus.bind(this)}><i className="fa fa-minus fa-1g"></i></button>
           <div>{this.props.numbers.workTime}</div>
-	  <button className=""><i className="fa fa-plus fa-1g" onClick={this.workTimePlus}></i></button>
+	  <button className="" onClick={this.workTimePlus.bind(this)}><i className="fa fa-plus fa-1g"></i></button>
 	</div>
 
 	<div className="cishu-container">
-	  <button className="" onClick={this.cishuMinus}><i className="fa fa-minus fa-1g"></i></button>
+	  <button className="" onClick={this.cishuMinus.bind(this)}><i className="fa fa-minus fa-1g"></i></button>
           <div>{this.props.numbers.cishu}</div>
-	  <button className=""><i className="fa fa-plus fa-1g" onClick={this.cishuPlus}></i></button>
+	  <button className="" onClick={this.cishuPlus.bind(this)}><i className="fa fa-plus fa-1g"></i></button>
 	</div>
 
 	<div id="countdown-clock"></div>
@@ -56,62 +56,44 @@ export default class Clock extends React.Component {
     );
   }
   shortBreakMinus(event) {
-    console.log('d');
-    console.log(this.props);
     var newNumbers = this.props.numbers;
     newNumbers.shortBreakTime = newNumbers.shortBreakTime - 1;
     onChange(newNumbers);
   }
-
-//Rewrite all of these
   shortBreakPlus(event) {
-    var newBreakTime = this.state.shortBreakTime + 1;
-    this.setState({
-      shortBreakTime: newBreakTime
-    });
-    onChange();
+    var newNumbers = this.props.numbers;
+    newNumbers.shortBreakTime = newNumbers.shortBreakTime + 1;
+    onChange(newNumbers);
   }
   longBreakMinus(event) {
-    var newBreakTime = this.state.longBreakTime - 1;
-    this.setState({
-      longBreakTime: newBreakTime
-    });
-    onChange();
+    var newNumbers = this.props.numbers;
+    newNumbers.longBreakTime = newNumbers.longBreakTime - 1;
+    onChange(newNumbers);
   }
   longBreakPlus(event) {
-    var newBreakTime = this.state.longBreakTime + 1;
-    this.setState({
-      longBreakTime: newBreakTime
-    });
-    onChange();
+    var newNumbers = this.props.numbers;
+    newNumbers.longBreakTime = newNumbers.longBreakTime + 1;
+    onChange(newNumbers);
   }
   workTimeMinus(event) {
-    var newTime = this.state.longBreakTime - 1;
-    this.setState({
-      longBreakTime: newTime
-    });
-    onChange();
+    var newNumbers = this.props.numbers;
+    newNumbers.workTime = newNumbers.workTime - 1;
+    onChange(newNumbers);
   }
   workTimePlus(event) {
-    var newTime = this.state.workTime + 1;
-    this.setState({
-      workTime: newTime
-    });
-    onChange();
+    var newNumbers = this.props.numbers;
+    newNumbers.workTime = newNumbers.workTime + 1;
+    onChange(newNumbers);
   }
   cishuMinus(event) {
-    var newCishu = this.state.cishu - 1;
-    this.setState({
-      longBreakTime: newCishu
-    });
-    onChange();
+    var newNumbers = this.props.numbers;
+    newNumbers.cishu = newNumbers.cishu - 1;
+    onChange(newNumbers);
   }
   cishuPlus(event) {
-    var newCishu = this.state.cishu + 1;
-    this.setState({
-      workTime: newCishu
-    });
-    onChange();
+    var newNumbers = this.props.numbers;
+    newNumbers.cishu = newNumbers.cishu + 1;
+    onChange(newNumbers);
   }
 
   startClock(event) {

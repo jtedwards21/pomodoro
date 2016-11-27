@@ -22,34 +22,34 @@ export default class Clock extends React.Component {
   render() {
     console.log(this.props);
     return (
-      <div>
-      <div className="container">
-      <div className="clock-component　row">
+      <div　className="box">
+      <div className="">
+      <div className="clock-component">
         <div className="text-center title">Pomodoro Clock</div>
 	<div className="text-center sub-title">A PRODUCTIVITY TIMER</div>
 	
-	<div className="adjuster col-sm-6 col-sm-offset-3">
-	<div className="time-container col-sm-3">
+	<div className="adjuster">
+	<div className="time-container">
 	  <button className="left-button btn btn-default" onClick={this.shortBreakMinus.bind(this)}><i className="fa fa-minus fa-1g"></i></button>
-          <div className="number">{this.props.numbers.shortBreakTime}</div>
+          <div className="btn number">{this.props.numbers.shortBreakTime}</div>
 	  <button className="right-button btn btn-default"  onClick={this.shortBreakPlus.bind(this)}><i className="fa fa-plus fa-1g"></i></button>
 	</div>
 
-	<div className="time-container col-sm-3">
+	<div className="time-container">
 	  <button className="left-button btn btn-default" onClick={this.longBreakMinus.bind(this)}><i className="fa fa-minus fa-1g"></i></button>
-          <div className="number">{this.props.numbers.longBreakTime}</div>
+          <div className="btn number">{this.props.numbers.longBreakTime}</div>
 	  <button className="right-button btn btn-default"  onClick={this.longBreakPlus.bind(this)}><i className="fa fa-plus fa-1g"></i></button>
 	</div>
 
-	<div className="time-container col-sm-3">
+	<div className="time-container">
 	  <button className="left-button btn btn-default" onClick={this.workTimeMinus.bind(this)}><i className="fa fa-minus fa-1g"></i></button>
-          <div　 className="number">{this.props.numbers.workTime}</div>
+          <div　 className="btn number">{this.props.numbers.workTime}</div>
 	  <button className="right-button btn btn-default" onClick={this.workTimePlus.bind(this)}><i className="fa fa-plus fa-1g"></i></button>
 	</div>
 
-	<div className="cishu-container col-sm-3">
-	  <button className="left-button btn btn-default" onClick={this.cishuMinus.bind(this)}><i className="fa fa-minus fa-1g"></i></button>
-          <div className="number">{this.props.numbers.cishu}</div>
+	<div className="cishu-container">
+	  <button className="btn left-button btn btn-default" onClick={this.cishuMinus.bind(this)}><i className="fa fa-minus fa-1g"></i></button>
+          <div className="btn number">{this.props.numbers.cishu}</div>
 	  <button className="right-button btn btn-default" onClick={this.cishuPlus.bind(this)}><i className="fa fa-plus fa-1g"></i></button>
 	</div>
 	</div>

@@ -21575,13 +21575,13 @@
 	      console.log(this.props);
 	      return _react2.default.createElement(
 	        "div",
-	        null,
+	        { className: "box" },
 	        _react2.default.createElement(
 	          "div",
-	          { className: "container" },
+	          { className: "" },
 	          _react2.default.createElement(
 	            "div",
-	            { className: "clock-component\u3000row" },
+	            { className: "clock-component" },
 	            _react2.default.createElement(
 	              "div",
 	              { className: "text-center title" },
@@ -21594,10 +21594,10 @@
 	            ),
 	            _react2.default.createElement(
 	              "div",
-	              { className: "adjuster col-sm-6 col-sm-offset-3" },
+	              { className: "adjuster" },
 	              _react2.default.createElement(
 	                "div",
-	                { className: "time-container col-sm-3" },
+	                { className: "time-container" },
 	                _react2.default.createElement(
 	                  "button",
 	                  { className: "left-button btn btn-default", onClick: this.shortBreakMinus.bind(this) },
@@ -21605,7 +21605,7 @@
 	                ),
 	                _react2.default.createElement(
 	                  "div",
-	                  { className: "number" },
+	                  { className: "btn number" },
 	                  this.props.numbers.shortBreakTime
 	                ),
 	                _react2.default.createElement(
@@ -21616,7 +21616,7 @@
 	              ),
 	              _react2.default.createElement(
 	                "div",
-	                { className: "time-container col-sm-3" },
+	                { className: "time-container" },
 	                _react2.default.createElement(
 	                  "button",
 	                  { className: "left-button btn btn-default", onClick: this.longBreakMinus.bind(this) },
@@ -21624,7 +21624,7 @@
 	                ),
 	                _react2.default.createElement(
 	                  "div",
-	                  { className: "number" },
+	                  { className: "btn number" },
 	                  this.props.numbers.longBreakTime
 	                ),
 	                _react2.default.createElement(
@@ -21635,7 +21635,7 @@
 	              ),
 	              _react2.default.createElement(
 	                "div",
-	                { className: "time-container col-sm-3" },
+	                { className: "time-container" },
 	                _react2.default.createElement(
 	                  "button",
 	                  { className: "left-button btn btn-default", onClick: this.workTimeMinus.bind(this) },
@@ -21643,7 +21643,7 @@
 	                ),
 	                _react2.default.createElement(
 	                  "div",
-	                  { className: "number" },
+	                  { className: "btn number" },
 	                  this.props.numbers.workTime
 	                ),
 	                _react2.default.createElement(
@@ -21654,15 +21654,15 @@
 	              ),
 	              _react2.default.createElement(
 	                "div",
-	                { className: "cishu-container col-sm-3" },
+	                { className: "cishu-container" },
 	                _react2.default.createElement(
 	                  "button",
-	                  { className: "left-button btn btn-default", onClick: this.cishuMinus.bind(this) },
+	                  { className: "btn left-button btn btn-default", onClick: this.cishuMinus.bind(this) },
 	                  _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
 	                ),
 	                _react2.default.createElement(
 	                  "div",
-	                  { className: "number" },
+	                  { className: "btn number" },
 	                  this.props.numbers.cishu
 	                ),
 	                _react2.default.createElement(

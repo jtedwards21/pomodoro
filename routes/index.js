@@ -6,7 +6,7 @@ import Clock from "../public/javascripts/components/clock";
 import React from "react";
 
 var numbers = {
-      shortBreakTime: 0,
+      shortBreakTime: 7,
       longBreakTime: 0,
       workTime: 0,
       cishu: 0

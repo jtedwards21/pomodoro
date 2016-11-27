@@ -60,7 +60,14 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_reactDom2.default.render(_react2.default.createElement(_clock2.default, null), document.getElementById("content"));
+	var numbers = {
+	      shortBreakTime: 7,
+	      longBreakTime: 0,
+	      workTime: 0,
+	      cishu: 0
+	};
+
+	_reactDom2.default.render(_react2.default.createElement(_clock2.default, { numbers: numbers }), document.getElementById("content"));
 
 /***/ },
 /* 1 */
@@ -21540,7 +21547,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var onChange = function onChange(numbers) {
-	  _reactDom2.default.render(_react2.default.createElement(App, { numbers: numbers }), document.getElementById("content"));
+	  _reactDom2.default.render(_react2.default.createElement(Clock, { numbers: numbers }), document.getElementById("content"));
 	};
 
 	var Clock = function (_React$Component) {
@@ -21565,6 +21572,7 @@
 	  _createClass(Clock, [{
 	    key: "render",
 	    value: function render() {
+	      console.log(this.props);
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "clock-component\u3000row" },
@@ -21583,7 +21591,7 @@
 	          { className: "time-container" },
 	          _react2.default.createElement(
 	            "button",
-	            { className: "", onClick: this.shortBreakMinus },
+	            { className: "", onClick: this.shortBreakMinus.bind(this) },
 	            _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
 	          ),
 	          _react2.default.createElement(
@@ -21661,7 +21669,7 @@
 	    key: "shortBreakMinus",
 	    value: function shortBreakMinus(event) {
 	      console.log('d');
-
+	      console.log(this.props);
 	      var newNumbers = this.props.numbers;
 	      newNumbers.shortBreakTime = newNumbers.shortBreakTime - 1;
 	      onChange(newNumbers);

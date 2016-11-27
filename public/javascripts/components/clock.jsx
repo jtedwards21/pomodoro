@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 var onChange = function(numbers) {
-　　ReactDOM.render(<App numbers={numbers}/>, document.getElementById("content"));
+　　ReactDOM.render(<Clock numbers={numbers}/>, document.getElementById("content"));
 }
 
 export default class Clock extends React.Component {
@@ -20,13 +20,14 @@ export default class Clock extends React.Component {
 
   }
   render() {
+    console.log(this.props);
     return (
       <div className="clock-component　row">
         <div className="text-center title">Pomodoro Clock</div>
 	<div className="text-center sub-title">A PRODUCTIVITY TIMER</div>
 
 	<div className="time-container">
-	  <button className="" onClick={this.shortBreakMinus}><i className="fa fa-minus fa-1g"></i></button>
+	  <button className="" onClick={this.shortBreakMinus.bind(this)}><i className="fa fa-minus fa-1g"></i></button>
           <div>{this.props.numbers.shortBreakTime}</div>
 	  <button className=""><i className="fa fa-plus fa-1g" onClick={this.shortBreakPlus}></i></button>
 	</div>
@@ -56,7 +57,7 @@ export default class Clock extends React.Component {
   }
   shortBreakMinus(event) {
     console.log('d');
-    
+    console.log(this.props);
     var newNumbers = this.props.numbers;
     newNumbers.shortBreakTime = newNumbers.shortBreakTime - 1;
     onChange(newNumbers);

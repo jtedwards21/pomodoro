@@ -1,141 +1,96 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import JQuery from "jquery";
+import Adjuster from "./adjuster";
+import Countdown from "./countdown";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-var onChange = function(numbers) {
-　　ReactDOM.render(<Clock numbers={numbers}/>, document.getElementById("content"));
-}
 
 export default class Clock extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      shortBreakTime: 0,
-      longBreakTime: 0,
-      workTime: 0,
-      cishu: 0,
+      shortBreakTime: 3,
+      longBreakTime: 15,
+      workTime: 25,
+      cishu: 4,
+      timesLeft: 4,
       menu: false
     };
+
 
 
   }
   showMenu(){
     console.log('click');
-    JQuery(".background").animate({
-	opacity: .8
-    }, "slow", function(){
-JQuery(".adjuster").show("slow");
-})
+    this.setState({menu: true});
   }
   hideMenu(){
-    JQuery(".adjuster").hide("slow", function(){
-JQuery(".background").animate({opacity: 0}, 5000);
-})
+    this.setState({menu:false});
   }
+  //The clock should reset after coming back from the menu if reset is pressed
+  //There should be visual transitions implemented through Reactjs
+  //The clock should cycle until there are 0 times left
   render() {
-    console.log(this.props);
+    var boxContent;
+    if(this.state.menu == false){
+	boxContent = <Countdown key={1} showMenu={this.showMenu.bind(this)} />
+    } else {
+	boxContent = <Adjuster key={2} hideMenu={this.hideMenu.bind(this)}　shortBreakTime={this.state.shortBreakTime} longBreakTime={this.state.longBreakTime} workTime={this.state.workTime} cishu={ this.state.cishu} shortBreakMinus={this.shortBreakMinus.bind(this)} shortBreakPlus={this.shortBreakPlus.bind(this)} longBreakMinus={this.longBreakMinus.bind(this)} longBreakPlus={this.longBreakPlus.bind(this)} workTimeMinus={this.workTimeMinus.bind(this)} workTimePlus={this.workTimePlus.bind(this)} cishuMinus={this.cishuMinus.bind(this)} cishuPlus={this.cishuPlus.bind(this)} />
+    }
     return (
       <div　className="row">
-      <div className="col-md-12">
-	
-	<div className="adjuster col-md-4 col-md-offset-4">
-
-	  <div className="title">Settings</div>
-
-	  <form　className="form-horizontal">
-	  <div className="form-group setting-group">
-	　　  <label className="control-label col-md-2">Short Break</label>
-	    <div className="input-group col-md-8 col-md-offset-2">
-	      <div className="input-group-addon" onClick={this.longBreakMinus.bind(this)}><i className="glyphicon glyphicon-plus"></i></div>
-              <div className="form-control">{this.props.numbers.shortBreakTime}</div>
-	      <div className="input-group-addon"  onClick={this.longBreakPlus.bind(this)}><i className="glyphicon glyphicon-minus"></i></div>
-	    </div>
-	  </div>
-
-	　　<div className="form-group setting-group">
-	　　  <label className="control-label col-md-2">Long Break</label>
-	    <div className="input-group col-md-8 col-md-offset-2">
-	      <div className="input-group-addon" onClick={this.longBreakMinus.bind(this)}><i className="glyphicon glyphicon-plus"></i></div>
-              <div className="form-control">{this.props.numbers.longBreakTime}</div>
-	      <div className="input-group-addon"  onClick={this.longBreakPlus.bind(this)}><i className="glyphicon glyphicon-minus"></i></div>
-	    </div>
- 	  </div>
-
-	　　<div className="form-group setting-group">
-	　　  <label className="control-label col-md-2">Work Time</label>
-	    <div className="input-group col-md-8 col-md-offset-2">
-	      <span className="input-group-addon" onClick={this.workTimeMinus.bind(this)}><i className="glyphicon glyphicon-plus"></i></span>
-              <div className="form-control">{this.props.numbers.workTime}</div>
-	      <span className="input-group-addon"  onClick={this.workTimePlus.bind(this)}><i className="glyphicon glyphicon-minus"></i></span>
-	    </div>
-	  </div>
-
-	　　<div className="form-group setting-group">
-	　　  <label className="control-label col-md-2"># of Times</label>
-	    <div className="input-group col-md-8 col-md-offset-2">
-	      <span className="input-group-addon" onClick={this.cishuMinus.bind(this)}><i className="glyphicon glyphicon-plus"></i></span>
-              <div className="form-control">{this.props.numbers.cishu}</div>
-	      <span className="input-group-addon"  onClick={this.cishuPlus.bind(this)}><i className="glyphicon glyphicon-minus"></i></span>
-	    </div>
-	  </div>
-	  </form>
-	
-	  <button className="btn btn-default btn-large">Close</button>
-
-	</div>
-
-        <div className="box">
-          <div className="clock-component">
-            <div className="text-center title">Pomodoro Clock</div>
-	    <div className="text-center sub-title">A PRODUCTIVITY TIMER</div>
-	    <button className="btn btn-default btn-large" onClick={this.showMenu.bind(this)}>Settings</button>
-            <div id="countdown-clock" className=""></div>
-	  </div>
-        </div>
+      <div className="box col-md-8 col-md-offset-2">
+        <div className="text-center title">Pomodoro Clock</div>
+	<div className="text-center sub-title">A PRODUCTIVITY TIMER</div>
+	<ReactCSSTransitionGroup
+          transitionName="example"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}>
+          {boxContent}
+        </ReactCSSTransitionGroup>
       </div>
       </div>
     );
   }
   shortBreakMinus(event) {
-    var newNumbers = this.props.numbers;
-    newNumbers.shortBreakTime = newNumbers.shortBreakTime - 1;
-    onChange(newNumbers);
+    var n = this.state.shortBreakTime;
+    n = n - 1;
+    this.setState({shortBreakTime:n});
   }
   shortBreakPlus(event) {
-    var newNumbers = this.props.numbers;
-    newNumbers.shortBreakTime = newNumbers.shortBreakTime + 1;
-    onChange(newNumbers);
+    var n = this.state.shortBreakTime;
+    n = n + 1;
+    this.setState({shortBreakTime:n});
   }
   longBreakMinus(event) {
-    var newNumbers = this.props.numbers;
-    newNumbers.longBreakTime = newNumbers.longBreakTime - 1;
-    onChange(newNumbers);
+    var n = this.state.longBreakTime;
+    n = n - 1;
+    this.setState({longBreakTime:n});
   }
   longBreakPlus(event) {
-    var newNumbers = this.props.numbers;
-    newNumbers.longBreakTime = newNumbers.longBreakTime + 1;
-    onChange(newNumbers);
+    var n = this.state.longBreakTime;
+    n = n + 1;
+    this.setState({longBreakTime:n});
   }
   workTimeMinus(event) {
-    var newNumbers = this.props.numbers;
-    newNumbers.workTime = newNumbers.workTime - 1;
-    onChange(newNumbers);
+    var n = this.state.workTime;
+    n = n - 1;
+    this.setState({workTime:n});
   }
   workTimePlus(event) {
-    var newNumbers = this.props.numbers;
-    newNumbers.workTime = newNumbers.workTime + 1;
-    onChange(newNumbers);
+    var n = this.state.workTime;
+    n = n + 1;
+    this.setState({workTime:n});
   }
   cishuMinus(event) {
-    var newNumbers = this.props.numbers;
-    newNumbers.cishu = newNumbers.cishu - 1;
-    onChange(newNumbers);
+    var n = this.state.cishu;
+    n = n - 1;
+    this.setState({cishu:n});
   }
   cishuPlus(event) {
-    var newNumbers = this.props.numbers;
-    newNumbers.cishu = newNumbers.cishu + 1;
-    onChange(newNumbers);
+    var n = this.state.cishu;
+    n = n + 1;
+    this.setState({cishu:n});
   }
 
   startClock(event) {

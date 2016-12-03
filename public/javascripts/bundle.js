@@ -21575,106 +21575,137 @@
 	      console.log(this.props);
 	      return _react2.default.createElement(
 	        "div",
-	        { className: "box" },
+	        { className: "row" },
 	        _react2.default.createElement(
 	          "div",
-	          { className: "" },
+	          { className: "col-md-12" },
 	          _react2.default.createElement(
 	            "div",
-	            { className: "clock-component" },
+	            { className: "adjuster" },
+	            "\u3000\u3000",
 	            _react2.default.createElement(
-	              "div",
-	              { className: "text-center title" },
-	              "Pomodoro Clock"
+	              "span",
+	              { className: "label label-info" },
+	              "Short Break"
 	            ),
 	            _react2.default.createElement(
 	              "div",
-	              { className: "text-center sub-title" },
-	              "A PRODUCTIVITY TIMER"
+	              { className: "input-group" },
+	              _react2.default.createElement(
+	                "span",
+	                { className: "input-group-addon", onClick: this.longBreakMinus.bind(this) },
+	                _react2.default.createElement("i", { className: "glyphicon glyphicon-plus" })
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "form-control input-middle" },
+	                this.props.numbers.shortBreakTime
+	              ),
+	              _react2.default.createElement(
+	                "span",
+	                { className: "input-group-addon", onClick: this.longBreakPlus.bind(this) },
+	                _react2.default.createElement("i", { className: "glyphicon glyphicon-minus" })
+	              )
 	            ),
+	            "\u3000\u3000",
+	            _react2.default.createElement(
+	              "span",
+	              { className: "label label-info" },
+	              "Long Break"
+	            ),
+	            "\u3000\u3000",
 	            _react2.default.createElement(
 	              "div",
-	              { className: "adjuster" },
+	              { className: "input-group" },
 	              _react2.default.createElement(
-	                "div",
-	                { className: "time-container" },
-	                _react2.default.createElement(
-	                  "button",
-	                  { className: "left-button btn btn-default", onClick: this.shortBreakMinus.bind(this) },
-	                  _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
-	                ),
-	                _react2.default.createElement(
-	                  "div",
-	                  { className: "btn number" },
-	                  this.props.numbers.shortBreakTime
-	                ),
-	                _react2.default.createElement(
-	                  "button",
-	                  { className: "right-button btn btn-default", onClick: this.shortBreakPlus.bind(this) },
-	                  _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
-	                )
+	                "span",
+	                { className: "input-group-addon", onClick: this.longBreakMinus.bind(this) },
+	                _react2.default.createElement("i", { className: "glyphicon glyphicon-plus" })
 	              ),
 	              _react2.default.createElement(
 	                "div",
-	                { className: "time-container" },
-	                _react2.default.createElement(
-	                  "button",
-	                  { className: "left-button btn btn-default", onClick: this.longBreakMinus.bind(this) },
-	                  _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
-	                ),
-	                _react2.default.createElement(
-	                  "div",
-	                  { className: "btn number" },
-	                  this.props.numbers.longBreakTime
-	                ),
-	                _react2.default.createElement(
-	                  "button",
-	                  { className: "right-button btn btn-default", onClick: this.longBreakPlus.bind(this) },
-	                  _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
-	                )
+	                { className: "form-control input-middle" },
+	                this.props.numbers.longBreakTime
+	              ),
+	              _react2.default.createElement(
+	                "span",
+	                { className: "input-group-addon", onClick: this.longBreakPlus.bind(this) },
+	                _react2.default.createElement("i", { className: "glyphicon glyphicon-minus" })
+	              )
+	            ),
+	            "\u3000\u3000",
+	            _react2.default.createElement(
+	              "span",
+	              { className: "label label-info" },
+	              "Work Time"
+	            ),
+	            "\u3000\u3000",
+	            _react2.default.createElement(
+	              "div",
+	              { className: "input-group" },
+	              _react2.default.createElement(
+	                "span",
+	                { className: "input-group-addon", onClick: this.workTimeMinus.bind(this) },
+	                _react2.default.createElement("i", { className: "glyphicon glyphicon-plus" })
 	              ),
 	              _react2.default.createElement(
 	                "div",
-	                { className: "time-container" },
-	                _react2.default.createElement(
-	                  "button",
-	                  { className: "left-button btn btn-default", onClick: this.workTimeMinus.bind(this) },
-	                  _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
-	                ),
-	                _react2.default.createElement(
-	                  "div",
-	                  { className: "btn number" },
-	                  this.props.numbers.workTime
-	                ),
-	                _react2.default.createElement(
-	                  "button",
-	                  { className: "right-button btn btn-default", onClick: this.workTimePlus.bind(this) },
-	                  _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
-	                )
+	                { className: "form-control input-middle" },
+	                this.props.numbers.workTime
+	              ),
+	              _react2.default.createElement(
+	                "span",
+	                { className: "input-group-addon", onClick: this.workTimePlus.bind(this) },
+	                _react2.default.createElement("i", { className: "glyphicon glyphicon-minus" })
+	              )
+	            ),
+	            "\u3000\u3000",
+	            _react2.default.createElement(
+	              "span",
+	              { className: "text-center" },
+	              "# of Times"
+	            ),
+	            "\u3000\u3000",
+	            _react2.default.createElement(
+	              "div",
+	              { className: "input-group" },
+	              _react2.default.createElement(
+	                "span",
+	                { className: "input-group-addon", onClick: this.cishuMinus.bind(this) },
+	                _react2.default.createElement("i", { className: "glyphicon glyphicon-plus" })
 	              ),
 	              _react2.default.createElement(
 	                "div",
-	                { className: "cishu-container" },
-	                _react2.default.createElement(
-	                  "button",
-	                  { className: "btn left-button btn btn-default", onClick: this.cishuMinus.bind(this) },
-	                  _react2.default.createElement("i", { className: "fa fa-minus fa-1g" })
-	                ),
-	                _react2.default.createElement(
-	                  "div",
-	                  { className: "btn number" },
-	                  this.props.numbers.cishu
-	                ),
-	                _react2.default.createElement(
-	                  "button",
-	                  { className: "right-button btn btn-default", onClick: this.cishuPlus.bind(this) },
-	                  _react2.default.createElement("i", { className: "fa fa-plus fa-1g" })
-	                )
+	                { className: "form-control input-middle" },
+	                this.props.numbers.cishu
+	              ),
+	              _react2.default.createElement(
+	                "span",
+	                { className: "input-group-addon", onClick: this.cishuPlus.bind(this) },
+	                _react2.default.createElement("i", { className: "glyphicon glyphicon-minus" })
 	              )
 	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "box" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "clock-component" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "text-center title" },
+	                "Pomodoro Clock"
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "text-center sub-title" },
+	                "A PRODUCTIVITY TIMER"
+	              ),
+	              _react2.default.createElement("div", { id: "countdown-clock", className: "" })
+	            )
 	          )
-	        ),
-	        _react2.default.createElement("div", { id: "countdown-clock", className: "" })
+	        )
 	      );
 	    }
 	  }, {

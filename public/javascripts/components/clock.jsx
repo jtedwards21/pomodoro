@@ -2,6 +2,7 @@ import React from "react";
 import Adjuster from "./adjuster";
 import Countdown from "./countdown";
 import Timer from "./timer";
+var Counter = require('./counter');
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
@@ -60,6 +61,9 @@ export default class Clock extends React.Component {
       changeAction();
     }
     //Set the timer value by changing minutes and seconds
+    var diff = Date.now() - this.state.endTime();
+    var diff = new Date(diff);
+    this.setState({minutes: diff.getMinutes(), seconds: diff.getSeconds()})
   }
 　　getTimeRemaining(endtime) {
   var t = Date.parse(endtime) - Date.parse(new Date());
@@ -74,9 +78,6 @@ export default class Clock extends React.Component {
   hideMenu(){
     this.setState({menu:false});
   }
-  //The clock should reset after coming back from the menu if reset is pressed
-  //There should be visual transitions implemented through Reactjs
-  //The clock should cycle until there are 0 times left
   render() {
     var boxContent;
     if(this.state.menu == false){
@@ -95,7 +96,7 @@ export default class Clock extends React.Component {
           transitionLeaveTimeout={300}>
           {boxContent}
         </ReactCSSTransitionGroup>
-	<Timer currentAction={this.state.currentAction} currentTimeLength={this.state.currentTimeLength} minutes={this.state.minutes} seconds={this.state.seconds}/>
+	<Timer minutes={this.state.minutes} seconds={this.state.seconds} />
       </div>
       </div>
     );

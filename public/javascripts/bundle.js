@@ -21551,6 +21551,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var Counter = __webpack_require__(195);
+
 	var Clock = function (_React$Component) {
 	  _inherits(Clock, _React$Component);
 
@@ -21558,6 +21560,8 @@
 	    _classCallCheck(this, Clock);
 
 	    var _this = _possibleConstructorReturn(this, (Clock.__proto__ || Object.getPrototypeOf(Clock)).call(this));
+
+	    _this.intervalPlaceholder = {};
 
 	    _this.state = {
 	      shortBreakTime: 3,
@@ -21570,17 +21574,65 @@
 	      minutes: 0,
 	      seconds: 0,
 	      currentAction: "",
-	      currentTimeLength: 0
+	      currentTimeLength: 0,
+	      currentInterval: _this.intervalPlaceholder
 	    };
-
 	    return _this;
 	  }
 
 	  _createClass(Clock, [{
-	    key: "startClock",
-	    value: function startClock() {
-	      var t = getTimeRemaining(this.props.endTime);
-	      this.setState({ minutes: t.minutes, seconds: t.seconds });
+	    key: "startPomodoro",
+	    value: function startPomodoro() {
+	      this.changeAction();
+	    }
+	  }, {
+	    key: "changeAction",
+	    value: function changeAction() {
+	      var action = this.state.currentAction;
+	      if (action == "") {
+	        this.setInterval(this.state.workTime);
+	        this.setState({ currentAction: "workTime" });
+	      } else if (action == "workTime" && this.state.timesLeft !== 0) {
+	        this.setInterval(this.state.shortBreakTime);
+	        this.setState({ currentAction: "shortBreakTime" });
+	      } else if (action == "shortBreakTime") {
+	        this.setInterval(this.state.workTime);
+	        //Reduce Times Left By One
+	        this.setState({ currentAction: "workTime" });
+	      } else if (action == "workTime" && this.state.timesLeft == 0) {
+	        this.setInterval(this.state.longBreakTime);
+	        //TimesLeft goes back to cishu
+	        this.setState({ currentAction: "longBreakTime" });
+	      }
+	    }
+	  }, {
+	    key: "setInterval",
+	    value: function (_setInterval) {
+	      function setInterval(_x) {
+	        return _setInterval.apply(this, arguments);
+	      }
+
+	      setInterval.toString = function () {
+	        return _setInterval.toString();
+	      };
+
+	      return setInterval;
+	    }(function (timeToSet) {
+	      //Clear the current Interval if Active
+	      var n = new Date();
+	      n.setMinutes(n.getMinutes() + timeToSet);
+	      var interval = setInterval(this.checkInterval(), 1000);
+	      this.setState({ currentInterval: interval, endTime: n });
+	    })
+	    //I don't know where to start checkInterval method
+
+	  }, {
+	    key: "checkInterval",
+	    value: function checkInterval() {
+	      if (this.state.endTime < Date.now()) {
+	        changeAction();
+	      }
+	      //Set the timer value by changing minutes and seconds
 	    }
 	  }, {
 	    key: "getTimeRemaining",
@@ -21638,7 +21690,7 @@
 	              transitionLeaveTimeout: 300 },
 	            boxContent
 	          ),
-	          _react2.default.createElement(_timer2.default, { currentAction: this.state.currentAction, currentTimeLength: this.state.currentTimeLength, minutes: this.state.minutes, seconds: this.state.seconds })
+	          _react2.default.createElement(Counter, { begin: 0, end: 1000, time: 2000, easing: "outCube" })
 	        )
 	      );
 	    }
@@ -22007,11 +22059,13 @@
 	        _react2.default.createElement(
 	          "div",
 	          null,
+	          "Remaining Minutes: ",
 	          this.state.remainingMinutes
 	        ),
 	        _react2.default.createElement(
 	          "div",
 	          null,
+	          "Remaining Seconds ",
 	          this.state.remainingSeconds
 	        )
 	      );
@@ -24201,6 +24255,401 @@
 	};
 
 	module.exports = ReactTransitionEvents;
+
+/***/ },
+/* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(1);
+	var raf = __webpack_require__(196);
+	var ease = __webpack_require__(198);
+
+	var Countdown = function (_React$Component) {
+	  _inherits(Countdown, _React$Component);
+
+	  function Countdown() {
+	    _classCallCheck(this, Countdown);
+
+	    return _possibleConstructorReturn(this, (Countdown.__proto__ || Object.getPrototypeOf(Countdown)).apply(this, arguments));
+	  }
+
+	  _createClass(Countdown, [{
+	    key: 'getInitialState',
+	    value: function getInitialState() {
+	      return { value: this.props.begin };
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.start = Date.now();
+	      raf(this.animate);
+	    }
+	  }, {
+	    key: 'animate',
+	    value: function animate() {
+	      if (this.stop) return;
+
+	      raf(this.animate);
+	      this.draw();
+	    }
+	  }, {
+	    key: 'draw',
+	    value: function draw() {
+	      if (!this.isMounted()) return;
+
+	      var time = this.props.time;
+	      var begin = this.props.begin;
+	      var end = this.props.end;
+	      var easing = this.props.easing;
+
+	      easing = easing && easing in ease ? easing : 'outCube';
+	      var now = Date.now();
+	      if (now - this.start >= time) this.stop = true;
+	      var percentage = (now - this.start) / time;
+	      percentage = percentage > 1 ? 1 : percentage;
+	      var easeVal = ease[easing](percentage);
+	      var val = begin + (end - begin) * easeVal;
+
+	      this.setState({ value: val });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'div',
+	        null,
+	        this.state.value
+	      );
+	    }
+	  }]);
+
+	  return Countdown;
+	}(React.Component);
+
+	exports.default = Countdown;
+
+/***/ },
+/* 196 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var now = __webpack_require__(197),
+	    global = typeof window === 'undefined' ? {} : window,
+	    vendors = ['moz', 'webkit'],
+	    suffix = 'AnimationFrame',
+	    raf = global['request' + suffix],
+	    caf = global['cancel' + suffix] || global['cancelRequest' + suffix],
+	    isNative = true;
+
+	for (var i = 0; i < vendors.length && !raf; i++) {
+	  raf = global[vendors[i] + 'Request' + suffix];
+	  caf = global[vendors[i] + 'Cancel' + suffix] || global[vendors[i] + 'CancelRequest' + suffix];
+	}
+
+	// Some versions of FF have rAF but not cAF
+	if (!raf || !caf) {
+	  isNative = false;
+
+	  var last = 0,
+	      id = 0,
+	      queue = [],
+	      frameDuration = 1000 / 60;
+
+	  raf = function raf(callback) {
+	    if (queue.length === 0) {
+	      var _now = now(),
+	          next = Math.max(0, frameDuration - (_now - last));
+	      last = next + _now;
+	      setTimeout(function () {
+	        var cp = queue.slice(0);
+	        // Clear queue here to prevent
+	        // callbacks from appending listeners
+	        // to the current frame's queue
+	        queue.length = 0;
+	        for (var i = 0; i < cp.length; i++) {
+	          if (!cp[i].cancelled) {
+	            try {
+	              cp[i].callback(last);
+	            } catch (e) {
+	              setTimeout(function () {
+	                throw e;
+	              }, 0);
+	            }
+	          }
+	        }
+	      }, Math.round(next));
+	    }
+	    queue.push({
+	      handle: ++id,
+	      callback: callback,
+	      cancelled: false
+	    });
+	    return id;
+	  };
+
+	  caf = function caf(handle) {
+	    for (var i = 0; i < queue.length; i++) {
+	      if (queue[i].handle === handle) {
+	        queue[i].cancelled = true;
+	      }
+	    }
+	  };
+	}
+
+	module.exports = function (fn) {
+	  // Wrap in a new function to prevent
+	  // `cancel` potentially being assigned
+	  // to the native rAF function
+	  if (!isNative) {
+	    return raf.call(global, fn);
+	  }
+	  return raf.call(global, function () {
+	    try {
+	      fn.apply(this, arguments);
+	    } catch (e) {
+	      setTimeout(function () {
+	        throw e;
+	      }, 0);
+	    }
+	  });
+	};
+	module.exports.cancel = function () {
+	  caf.apply(global, arguments);
+	};
+
+/***/ },
+/* 197 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
+
+	// Generated by CoffeeScript 1.6.3
+	(function () {
+	  var getNanoSeconds, hrtime, loadTime;
+
+	  if (typeof performance !== "undefined" && performance !== null && performance.now) {
+	    module.exports = function () {
+	      return performance.now();
+	    };
+	  } else if (typeof process !== "undefined" && process !== null && process.hrtime) {
+	    module.exports = function () {
+	      return (getNanoSeconds() - loadTime) / 1e6;
+	    };
+	    hrtime = process.hrtime;
+	    getNanoSeconds = function getNanoSeconds() {
+	      var hr;
+	      hr = hrtime();
+	      return hr[0] * 1e9 + hr[1];
+	    };
+	    loadTime = getNanoSeconds();
+	  } else if (Date.now) {
+	    module.exports = function () {
+	      return Date.now() - loadTime;
+	    };
+	    loadTime = Date.now();
+	  } else {
+	    module.exports = function () {
+	      return new Date().getTime() - loadTime;
+	    };
+	    loadTime = new Date().getTime();
+	  }
+	}).call(undefined);
+
+	/*
+	//@ sourceMappingURL=performance-now.map
+	*/
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 198 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	// easing functions from "Tween.js"
+
+	exports.linear = function (n) {
+	  return n;
+	};
+
+	exports.inQuad = function (n) {
+	  return n * n;
+	};
+
+	exports.outQuad = function (n) {
+	  return n * (2 - n);
+	};
+
+	exports.inOutQuad = function (n) {
+	  n *= 2;
+	  if (n < 1) return 0.5 * n * n;
+	  return -0.5 * (--n * (n - 2) - 1);
+	};
+
+	exports.inCube = function (n) {
+	  return n * n * n;
+	};
+
+	exports.outCube = function (n) {
+	  return --n * n * n + 1;
+	};
+
+	exports.inOutCube = function (n) {
+	  n *= 2;
+	  if (n < 1) return 0.5 * n * n * n;
+	  return 0.5 * ((n -= 2) * n * n + 2);
+	};
+
+	exports.inQuart = function (n) {
+	  return n * n * n * n;
+	};
+
+	exports.outQuart = function (n) {
+	  return 1 - --n * n * n * n;
+	};
+
+	exports.inOutQuart = function (n) {
+	  n *= 2;
+	  if (n < 1) return 0.5 * n * n * n * n;
+	  return -0.5 * ((n -= 2) * n * n * n - 2);
+	};
+
+	exports.inQuint = function (n) {
+	  return n * n * n * n * n;
+	};
+
+	exports.outQuint = function (n) {
+	  return --n * n * n * n * n + 1;
+	};
+
+	exports.inOutQuint = function (n) {
+	  n *= 2;
+	  if (n < 1) return 0.5 * n * n * n * n * n;
+	  return 0.5 * ((n -= 2) * n * n * n * n + 2);
+	};
+
+	exports.inSine = function (n) {
+	  return 1 - Math.cos(n * Math.PI / 2);
+	};
+
+	exports.outSine = function (n) {
+	  return Math.sin(n * Math.PI / 2);
+	};
+
+	exports.inOutSine = function (n) {
+	  return .5 * (1 - Math.cos(Math.PI * n));
+	};
+
+	exports.inExpo = function (n) {
+	  return 0 == n ? 0 : Math.pow(1024, n - 1);
+	};
+
+	exports.outExpo = function (n) {
+	  return 1 == n ? n : 1 - Math.pow(2, -10 * n);
+	};
+
+	exports.inOutExpo = function (n) {
+	  if (0 == n) return 0;
+	  if (1 == n) return 1;
+	  if ((n *= 2) < 1) return .5 * Math.pow(1024, n - 1);
+	  return .5 * (-Math.pow(2, -10 * (n - 1)) + 2);
+	};
+
+	exports.inCirc = function (n) {
+	  return 1 - Math.sqrt(1 - n * n);
+	};
+
+	exports.outCirc = function (n) {
+	  return Math.sqrt(1 - --n * n);
+	};
+
+	exports.inOutCirc = function (n) {
+	  n *= 2;
+	  if (n < 1) return -0.5 * (Math.sqrt(1 - n * n) - 1);
+	  return 0.5 * (Math.sqrt(1 - (n -= 2) * n) + 1);
+	};
+
+	exports.inBack = function (n) {
+	  var s = 1.70158;
+	  return n * n * ((s + 1) * n - s);
+	};
+
+	exports.outBack = function (n) {
+	  var s = 1.70158;
+	  return --n * n * ((s + 1) * n + s) + 1;
+	};
+
+	exports.inOutBack = function (n) {
+	  var s = 1.70158 * 1.525;
+	  if ((n *= 2) < 1) return 0.5 * (n * n * ((s + 1) * n - s));
+	  return 0.5 * ((n -= 2) * n * ((s + 1) * n + s) + 2);
+	};
+
+	exports.inBounce = function (n) {
+	  return 1 - exports.outBounce(1 - n);
+	};
+
+	exports.outBounce = function (n) {
+	  if (n < 1 / 2.75) {
+	    return 7.5625 * n * n;
+	  } else if (n < 2 / 2.75) {
+	    return 7.5625 * (n -= 1.5 / 2.75) * n + 0.75;
+	  } else if (n < 2.5 / 2.75) {
+	    return 7.5625 * (n -= 2.25 / 2.75) * n + 0.9375;
+	  } else {
+	    return 7.5625 * (n -= 2.625 / 2.75) * n + 0.984375;
+	  }
+	};
+
+	exports.inOutBounce = function (n) {
+	  if (n < .5) return exports.inBounce(n * 2) * .5;
+	  return exports.outBounce(n * 2 - 1) * .5 + .5;
+	};
+
+	// aliases
+
+	exports['in-quad'] = exports.inQuad;
+	exports['out-quad'] = exports.outQuad;
+	exports['in-out-quad'] = exports.inOutQuad;
+	exports['in-cube'] = exports.inCube;
+	exports['out-cube'] = exports.outCube;
+	exports['in-out-cube'] = exports.inOutCube;
+	exports['in-quart'] = exports.inQuart;
+	exports['out-quart'] = exports.outQuart;
+	exports['in-out-quart'] = exports.inOutQuart;
+	exports['in-quint'] = exports.inQuint;
+	exports['out-quint'] = exports.outQuint;
+	exports['in-out-quint'] = exports.inOutQuint;
+	exports['in-sine'] = exports.inSine;
+	exports['out-sine'] = exports.outSine;
+	exports['in-out-sine'] = exports.inOutSine;
+	exports['in-expo'] = exports.inExpo;
+	exports['out-expo'] = exports.outExpo;
+	exports['in-out-expo'] = exports.inOutExpo;
+	exports['in-circ'] = exports.inCirc;
+	exports['out-circ'] = exports.outCirc;
+	exports['in-out-circ'] = exports.inOutCirc;
+	exports['in-back'] = exports.inBack;
+	exports['out-back'] = exports.outBack;
+	exports['in-out-back'] = exports.inOutBack;
+	exports['in-bounce'] = exports.inBounce;
+	exports['out-bounce'] = exports.outBounce;
+	exports['in-out-bounce'] = exports.inOutBounce;
 
 /***/ }
 /******/ ]);

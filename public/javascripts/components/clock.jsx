@@ -1,6 +1,7 @@
 import React from "react";
 import Adjuster from "./adjuster";
 import Countdown from "./countdown";
+import Timer from "./timer";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
@@ -8,17 +9,63 @@ export default class Clock extends React.Component {
   constructor() {
     super();
 
+    this.intervalPlaceholder = {}
+
     this.state = {
       shortBreakTime: 3,
       longBreakTime: 15,
       workTime: 25,
       cishu: 4,
       timesLeft: 4,
-      menu: false
+      menu: false,
+      endTime: new Date(),
+      minutes: 0,
+      seconds: 0,
+      currentAction: "",
+      currentTimeLength: 0,
+      currentInterval: this.intervalPlaceholder
     };
-
-
-
+  }
+  startPomodoro(){
+    this.changeAction();
+  }
+  changeAction(){
+    var action = this.state.currentAction;
+　　　　if(action == ""){
+      this.setInterval(this.state.workTime);
+      this.setState({currentAction: "workTime"});
+    }  else if(action == "workTime" && this.state.timesLeft !== 0){
+	 this.setInterval(this.state.shortBreakTime);
+	 this.setState({currentAction: "shortBreakTime"});
+       } else if(action == "shortBreakTime"){
+	    this.setInterval(this.state.workTime);
+	    //Reduce Times Left By One
+	    this.setState({currentAction: "workTime"})
+         } else if(action == "workTime" && this.state.timesLeft == 0){
+		this.setInterval(this.state.longBreakTime)
+	        //TimesLeft goes back to cishu
+		this.setState({currentAction: "longBreakTime"});
+	   }
+  }
+  setInterval(timeToSet){
+    //Clear the current Interval if Active
+    var n = new Date();
+　　　　n.setMinutes(n.getMinutes() + timeToSet)
+    var interval = setInterval(this.checkInterval(), 1000)
+    this.setState({currentInterval: interval, endTime: n});
+  }
+  //I don't know where to start checkInterval method
+  checkInterval(){
+    if(this.state.endTime < Date.now()){
+      changeAction();
+    }
+    //Set the timer value by changing minutes and seconds
+  }
+　　getTimeRemaining(endtime) {
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor( (t/1000) % 60 );
+  var minutes = Math.floor( (t/1000/60) % 60 );
+  return {'minutes': minutes,　'seconds': seconds　}
   }
   showMenu(){
     console.log('click');
@@ -48,9 +95,13 @@ export default class Clock extends React.Component {
           transitionLeaveTimeout={300}>
           {boxContent}
         </ReactCSSTransitionGroup>
+	<Timer currentAction={this.state.currentAction} currentTimeLength={this.state.currentTimeLength} minutes={this.state.minutes} seconds={this.state.seconds}/>
       </div>
       </div>
     );
+  }
+  startClock() {
+
   }
   shortBreakMinus(event) {
     var n = this.state.shortBreakTime;
@@ -91,9 +142,5 @@ export default class Clock extends React.Component {
     var n = this.state.cishu;
     n = n + 1;
     this.setState({cishu:n});
-  }
-
-  startClock(event) {
-
   }
 }
